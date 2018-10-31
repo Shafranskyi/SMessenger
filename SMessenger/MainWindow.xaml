@@ -18,7 +18,7 @@
         <Button Grid.Column="2" Content="Правая кнопка" />
     </Grid>-->
 
-    <Grid Name="Own" ShowGridLines="True">
+    <Grid Name="Own">
         <Grid.RowDefinitions>
             <RowDefinition Name="row1"/>
             <RowDefinition Name="row2"/>
