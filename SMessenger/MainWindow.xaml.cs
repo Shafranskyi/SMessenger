@@ -34,7 +34,82 @@ namespace SMessenger
 
             Work_place();
 
+            List_of_friends();
         }
+
+        #region List Friends
+        private void List_of_friends()
+        {
+            ListView friends = new ListView();
+            Grid.SetRow(friends, 1);
+
+            StackPanel friend = new StackPanel()
+            {
+                Height = 50,
+                Orientation = Orientation.Horizontal
+            };
+
+            Grid F = new Grid()
+            {
+                ShowGridLines = true,
+                Width = ((this.Width - 5) / 2) - 25
+            };
+           
+            ColumnDefinition Ig = new ColumnDefinition()
+            {
+                Width = new GridLength(50)
+            };
+            ColumnDefinition An = new ColumnDefinition();
+            F.ColumnDefinitions.Add(Ig);
+            F.ColumnDefinitions.Add(An);
+
+            Ellipse Im = new Ellipse()
+            {
+                Height = 50,
+                Width = 50
+            };
+            ImageBrush myBrush = new ImageBrush()
+            {
+                ImageSource = new BitmapImage(new Uri(@"C:\Users\shafr\Desktop\1.jpg")),
+                Stretch = Stretch.UniformToFill,
+            };
+            Im.Fill = myBrush;
+            Grid.SetColumn(Im, 0);
+
+            Grid Tx = new Grid()
+            {
+                ShowGridLines = true
+            };
+            Grid.SetColumn(Tx, 1);
+            RowDefinition Rtx_title = new RowDefinition()
+            {
+                Height = new GridLength(20)
+            };
+            RowDefinition Rtx = new RowDefinition();
+            Tx.RowDefinitions.Add(Rtx_title);
+            Tx.RowDefinitions.Add(Rtx);
+
+            TextBlock tx_title = new TextBlock()
+            {
+                Text = "1111111111"
+            };
+            Grid.SetRow(tx_title, 0);
+
+            TextBlock tx = new TextBlock()
+            {
+                Text = "ssdfsdf"
+            };
+            Grid.SetRow(tx, 1);
+
+            Tx.Children.Add(tx_title);
+            Tx.Children.Add(tx);
+            F.Children.Add(Im);
+            F.Children.Add(Tx);
+            friend.Children.Add(F);
+            friends.Items.Add(friend);
+            MLeft.Children.Add(friends);
+        }
+        #endregion
 
         #region Work place
         private void Work_place()
