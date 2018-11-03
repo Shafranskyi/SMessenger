@@ -21,7 +21,8 @@ namespace SMessenger
     public partial class MainWindow : Window
     {
         Button first, third, second, menu;
-        Grid MTitle, All, MLeft, MRight;
+        Grid MTitle, All, MLeft, MRight, Mcol;
+        ListView LMesseges;
 
         public MainWindow()
         {
@@ -35,7 +36,80 @@ namespace SMessenger
             Work_place();
 
             List_of_friends();
+
+            Messeges();
         }
+
+        #region
+        private void Messeges()
+        {
+            LMesseges = new ListView()
+            {
+                ItemContainerStyle = Application.Current.Resources["ListViewItemOptionStyle"] as Style
+            };
+            MRight.Children.Add(LMesseges);
+
+            int a = 0;
+            for (int i = 0; i < 5; ++i)
+            {
+                StackPanel messege = new StackPanel()
+                {
+                    Height = 40,
+                    Width = ((this.Width - 5) / 2) - 15
+                };
+
+                Mcol = new Grid();
+                //Mcol.ShowGridLines = true;
+                ColumnDefinition Mc1 = new ColumnDefinition();
+                ColumnDefinition Mc2 = new ColumnDefinition();
+                ColumnDefinition Mc3 = new ColumnDefinition();
+                Mcol.ColumnDefinitions.Add(Mc1);
+                Mcol.ColumnDefinitions.Add(Mc2);
+                Mcol.ColumnDefinitions.Add(Mc3);
+
+                TextBlock M = new TextBlock()
+                {
+                    TextWrapping = TextWrapping.Wrap,
+                    TextTrimming = TextTrimming.WordEllipsis,
+                    TextAlignment = TextAlignment.Justify,
+                    Margin = new Thickness(5)
+                };
+                if (i == 3 || i == 1)
+                    M.Text = "dfjnsdkfns555555555555555555555555555555555555555555555555555555555555555555555";
+                else
+                    M.Text = "dfjnsdkfnsdfjnkdsfndjnfjdnf";
+                messege.Height = M.Height;
+                
+                Border B = new Border()
+                {
+                    Child = M,
+                    Style = Application.Current.Resources["MyBorderStyle"] as Style,
+                    Width = M.Width
+                };
+
+                if (a == 1)
+                {
+                    B.HorizontalAlignment = HorizontalAlignment.Right;
+                    B.Margin = new Thickness(0, 0, 5, 0);
+                    Grid.SetColumn(B, a);
+                    Grid.SetColumnSpan(B, 2);
+                    a = 0;
+                }
+                else
+                {
+                    B.HorizontalAlignment = HorizontalAlignment.Left;
+                    Grid.SetColumn(B, a);
+                    Grid.SetColumnSpan(B, 2);
+                    a = 1;
+                }
+
+                Mcol.Children.Add(B);
+                messege.Children.Add(Mcol);
+                LMesseges.Items.Add(messege);
+            }
+
+        }
+        #endregion
 
         #region List Friends
         private void List_of_friends()
@@ -51,7 +125,7 @@ namespace SMessenger
 
             Grid F = new Grid()
             {
-                ShowGridLines = true,
+                //ShowGridLines = true,
                 Width = ((this.Width - 5) / 2) - 25
             };
            
@@ -78,7 +152,7 @@ namespace SMessenger
 
             Grid Tx = new Grid()
             {
-                ShowGridLines = true
+                //ShowGridLines = true
             };
             Grid.SetColumn(Tx, 1);
             RowDefinition Rtx_title = new RowDefinition()
@@ -91,13 +165,20 @@ namespace SMessenger
 
             TextBlock tx_title = new TextBlock()
             {
-                Text = "1111111111"
+                Text = "1111111111",
+                FontSize = 15,
+                FontFamily = new FontFamily("Comic Sans MS"),
+                VerticalAlignment = VerticalAlignment.Center
             };
             Grid.SetRow(tx_title, 0);
 
             TextBlock tx = new TextBlock()
             {
-                Text = "ssdfsdf"
+                Text = "ssdfsdf555555555555555555555555555555555555555555555555555555555555555555555555555555555555",
+                FontSize = 15,
+                FontFamily = new FontFamily("Comic Sans MS"),
+                VerticalAlignment = VerticalAlignment.Center,
+                TextTrimming = TextTrimming.CharacterEllipsis
             };
             Grid.SetRow(tx, 1);
 
@@ -164,8 +245,9 @@ namespace SMessenger
                 Margin = new Thickness(10),
                 Background = new SolidColorBrush(Color.FromRgb(234, 229, 229)),
                 FontSize = 15,
-                FontFamily = new FontFamily("Comi"),
-                VerticalContentAlignment = VerticalAlignment.Center
+                FontFamily = new FontFamily("Comic Sans MS"),
+                VerticalContentAlignment = VerticalAlignment.Center,
+                BorderThickness = new Thickness(0)
             };
             Grid.SetColumn(search, 1);
 
@@ -183,7 +265,7 @@ namespace SMessenger
             Grid.SetColumn(Spl, 1);
 
             MRight = new Grid();
-            Grid.SetColumn(MRight, 1);
+            Grid.SetColumn(MRight, 2);
 
             All.Children.Add(MLeft);
             All.Children.Add(Spl);
@@ -286,5 +368,6 @@ namespace SMessenger
             this.Close();
         }
         #endregion
+        
     }
 }

@@ -6,18 +6,6 @@
         xmlns:local="clr-namespace:SMessenger"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStyle="None" Loaded="Window_Loaded">
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Content="Левая кнопка" />
-        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="1"
-        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <Button Grid.Column="2" Content="Правая кнопка" />
-    </Grid>-->
-
     <Grid Name="Own">
         <Grid.RowDefinitions>
             <RowDefinition Name="row1"/>
