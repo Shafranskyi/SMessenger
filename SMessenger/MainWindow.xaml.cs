@@ -21,7 +21,7 @@ namespace SMessenger
     public partial class MainWindow : Window
     {
         Button first, third, second, menu;
-        Grid MTitle, All, MLeft, MRight, Mcol;
+        Grid MTitle, All, MLeft, MRight;
         ListView LMesseges;
 
         public MainWindow()
@@ -45,66 +45,34 @@ namespace SMessenger
         {
             LMesseges = new ListView()
             {
-                ItemContainerStyle = Application.Current.Resources["ListViewItemOptionStyle"] as Style
+                ItemContainerStyle = Application.Current.Resources["ListViewItemOptionStyle"] as Style,
+                Background = Application.Current.Resources["WordBlueBrush"] as Brush
             };
             MRight.Children.Add(LMesseges);
 
-            int a = 0;
-            for (int i = 0; i < 5; ++i)
+            for (int i = 0; i <10; ++i)
             {
+
+                MessegeBubble d = new MessegeBubble();
+                if (i == 1 || i == 4 || i == 5)
+                {
+                    d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
+                    d.Prof_name.Visibility = Visibility.Hidden;
+                    d.Text_mess.Text = "444444444444444sdfsdfkjsdbfkdsbfjdfdjbfjdbfjdbfjdbfjdbfjdbjdbjdjjdbshbjfsvhfshd";
+                }
+                else
+                {
+                    d.Text_mess.Text = "jdbfhdbfh";
+                }
+                d.Grid_.Width = ((((this.Width - 5) / 2) - 15) / 3) * 2;
+
                 StackPanel messege = new StackPanel()
                 {
-                    Height = 40,
+                    Height = d.Height,
                     Width = ((this.Width - 5) / 2) - 15
                 };
 
-                Mcol = new Grid();
-                //Mcol.ShowGridLines = true;
-                ColumnDefinition Mc1 = new ColumnDefinition();
-                ColumnDefinition Mc2 = new ColumnDefinition();
-                ColumnDefinition Mc3 = new ColumnDefinition();
-                Mcol.ColumnDefinitions.Add(Mc1);
-                Mcol.ColumnDefinitions.Add(Mc2);
-                Mcol.ColumnDefinitions.Add(Mc3);
-
-                TextBlock M = new TextBlock()
-                {
-                    TextWrapping = TextWrapping.Wrap,
-                    TextTrimming = TextTrimming.WordEllipsis,
-                    TextAlignment = TextAlignment.Justify,
-                    Margin = new Thickness(5)
-                };
-                if (i == 3 || i == 1)
-                    M.Text = "dfjnsdkfns555555555555555555555555555555555555555555555555555555555555555555555";
-                else
-                    M.Text = "dfjnsdkfnsdfjnkdsfndjnfjdnf";
-                messege.Height = M.Height;
-                
-                Border B = new Border()
-                {
-                    Child = M,
-                    Style = Application.Current.Resources["MyBorderStyle"] as Style,
-                    Width = M.Width
-                };
-
-                if (a == 1)
-                {
-                    B.HorizontalAlignment = HorizontalAlignment.Right;
-                    B.Margin = new Thickness(0, 0, 5, 0);
-                    Grid.SetColumn(B, a);
-                    Grid.SetColumnSpan(B, 2);
-                    a = 0;
-                }
-                else
-                {
-                    B.HorizontalAlignment = HorizontalAlignment.Left;
-                    Grid.SetColumn(B, a);
-                    Grid.SetColumnSpan(B, 2);
-                    a = 1;
-                }
-
-                Mcol.Children.Add(B);
-                messege.Children.Add(Mcol);
+                messege.Children.Add(d);
                 LMesseges.Items.Add(messege);
             }
 
