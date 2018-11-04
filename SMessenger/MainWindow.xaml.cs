@@ -40,7 +40,7 @@ namespace SMessenger
             Messeges();
         }
 
-        #region
+        #region Chat
         private void Messeges()
         {
             LMesseges = new ListView()
@@ -50,21 +50,23 @@ namespace SMessenger
             };
             MRight.Children.Add(LMesseges);
 
-            for (int i = 0; i <10; ++i)
+            for (int i = 0; i < 10; ++i)
             {
-
                 MessegeBubble d = new MessegeBubble();
                 if (i == 1 || i == 4 || i == 5)
                 {
                     d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
                     d.Prof_name.Visibility = Visibility.Hidden;
-                    d.Text_mess.Text = "444444444444444sdfsdfkjsdbfkdsbfjdfdjbfjdbfjdbfjdbfjdbfjdbjdbjdjjdbshbjfsvhfshd";
+                    d.Text_mess.Text = "444444444444444sd888888fsvhfshd";
                 }
                 else
                 {
                     d.Text_mess.Text = "jdbfhdbfh";
                 }
-                d.Grid_.Width = ((((this.Width - 5) / 2) - 15) / 3) * 2;
+                d.Text_mess.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                Size size = d.Text_mess.DesiredSize;
+                if (size.Width > 250)
+                    d.Grid_.Width = 250;
 
                 StackPanel messege = new StackPanel()
                 {
