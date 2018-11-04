@@ -56,13 +56,12 @@ namespace SMessenger
                 if (i == 1 || i == 4 || i == 5)
                 {
                     d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
+                    d.Time.HorizontalAlignment = HorizontalAlignment.Left;
                     d.Prof_name.Visibility = Visibility.Hidden;
-                    d.Text_mess.Text = "444444444444444sd888888fsvhfshd";
+                    d.Text_mess.Text = "444444444444444sd888888f55555555555555555555555555555555555555svhfshd";
                 }
                 else
-                {
                     d.Text_mess.Text = "jdbfhdbfh";
-                }
                 d.Text_mess.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
                 Size size = d.Text_mess.DesiredSize;
                 if (size.Width > 250)
@@ -77,7 +76,6 @@ namespace SMessenger
                 messege.Children.Add(d);
                 LMesseges.Items.Add(messege);
             }
-
         }
         #endregion
 

@@ -60,6 +60,14 @@
                       Fill="{StaticResource ForegroundLightBrush}"
                 />
 
+                <TextBlock Name="Time"
+                           Foreground="{StaticResource ForegroundLightBrush}"
+                           HorizontalAlignment="Right"
+                           Grid.Row="2"
+                           Text="11:52"
+                           FontSize="{StaticResource FontSizeSmall}"
+                    />
+
             </Grid>
 
         </Grid>
