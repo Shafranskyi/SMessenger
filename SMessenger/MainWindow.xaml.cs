@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SMessenger.Controls;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace SMessenger
 {
@@ -33,12 +36,40 @@ namespace SMessenger
         {
             My_Title();
 
-            Work_place();
+            //Work_place();
 
-            List_of_friends();
+            //List_of_friends();
 
-            Messeges();
+            //Messeges();
+
+            //JsoN();
         }
+
+        #region Json
+        private void JsoN()
+        {
+            Person person1 = new Person("Tom", "Readl", 29);
+            Person person2 = new Person("Bill", "Gates", 25);
+            Person[] people = new Person[] { person1, person2 };
+
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Person[]));
+
+            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, people);
+            }
+
+            using (FileStream fs = new FileStream("people.json", FileMode.OpenOrCreate))
+            {
+                Person[] newpeople = (Person[])jsonFormatter.ReadObject(fs);
+
+                foreach (Person p in newpeople)
+                {
+                   MessageBox.Show($"{p.Name}, {p.Surname}, {p.Age}");
+                }
+            }
+        }
+        #endregion
 
         #region Chat
         private void Messeges()
@@ -48,17 +79,18 @@ namespace SMessenger
                 ItemContainerStyle = Application.Current.Resources["ListViewItemOptionStyle"] as Style,
                 Background = Application.Current.Resources["WordBlueBrush"] as Brush
             };
+            Grid.SetRow(LMesseges, 0);
             MRight.Children.Add(LMesseges);
 
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 MessegeBubble d = new MessegeBubble();
-                if (i == 1 || i == 4 || i == 5)
+                if (i == 1 || i == 3)
                 {
                     d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
                     d.Time.HorizontalAlignment = HorizontalAlignment.Left;
                     d.Prof_name.Visibility = Visibility.Hidden;
-                    d.Text_mess.Text = "444444444444444sd888888f55555555555555555555555555555555555555svhfshd";
+                    d.Text_mess.Text = "44444444444444455555555555555555555555555555555555555555555555555555555555555555555555555svhfshd";
                 }
                 else
                     d.Text_mess.Text = "jdbfhdbfh";
@@ -76,6 +108,9 @@ namespace SMessenger
                 messege.Children.Add(d);
                 LMesseges.Items.Add(messege);
             }
+
+
+
         }
         #endregion
 
@@ -93,10 +128,9 @@ namespace SMessenger
 
             Grid F = new Grid()
             {
-                //ShowGridLines = true,
                 Width = ((this.Width - 5) / 2) - 25
             };
-           
+
             ColumnDefinition Ig = new ColumnDefinition()
             {
                 Width = new GridLength(50)
@@ -118,10 +152,7 @@ namespace SMessenger
             Im.Fill = myBrush;
             Grid.SetColumn(Im, 0);
 
-            Grid Tx = new Grid()
-            {
-                //ShowGridLines = true
-            };
+            Grid Tx = new Grid();
             Grid.SetColumn(Tx, 1);
             RowDefinition Rtx_title = new RowDefinition()
             {
@@ -202,11 +233,11 @@ namespace SMessenger
             menu = new Button()
             {
                 Style = Application.Current.Resources["Kv"] as Style,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+                Content = "M",
+                FontSize = 15
             };
             Grid.SetColumn(menu, 0);
-            menu.Content = "M";
-            menu.FontSize = 15;
             TextBox search = new TextBox()
             {
                 Style = Application.Current.Resources["TextBox"] as Style,
@@ -234,11 +265,18 @@ namespace SMessenger
 
             MRight = new Grid();
             Grid.SetColumn(MRight, 2);
-
+            RowDefinition Mr1 = new RowDefinition();
+            RowDefinition Mr2 = new RowDefinition()
+            {
+                Height = new GridLength(100)
+            };
+            MRight.RowDefinitions.Add(Mr1);
+            MRight.RowDefinitions.Add(Mr2);
+            
             All.Children.Add(MLeft);
             All.Children.Add(Spl);
             All.Children.Add(MRight);
-            
+
             Own.Children.Add(All);
         }
         #endregion
@@ -246,61 +284,65 @@ namespace SMessenger
         #region Create Title
         private void My_Title()
         {
-            row1.Height = new GridLength(33);
-            MTitle = new Grid();
-            ColumnDefinition MT1 = new ColumnDefinition();
-            ColumnDefinition MT2 = new ColumnDefinition()
+            try
             {
-                Width = new GridLength(33 * 3)
-            };
-            MTitle.ColumnDefinitions.Add(MT1); MTitle.ColumnDefinitions.Add(MT2);
-            Grid.SetRow(MTitle, 0);
+                row1.Height = new GridLength(33);
+                MTitle = new Grid();
+                ColumnDefinition MT1 = new ColumnDefinition();
+                ColumnDefinition MT2 = new ColumnDefinition()
+                {
+                    Width = new GridLength(33 * 3)
+                };
+                MTitle.ColumnDefinitions.Add(MT1); MTitle.ColumnDefinitions.Add(MT2);
+                Grid.SetRow(MTitle, 0);
 
-            DockPanel Title_buttons = new DockPanel
-            {
-                LastChildFill = false
-            };
-            Grid.SetColumn(Title_buttons, 1);
-            first = new Button()
-            {
-                Content = "X",
-                Width = 33,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Style = Application.Current.Resources["Circle"] as Style
-            };
-            third = new Button()
-            {
-                Content = "_",
-                Width = first.Width,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Style = Application.Current.Resources["Circle"] as Style,
-                FontSize = 15
-            };
-            second = new Button()
-            {
-                Content = "+",
-                Width = first.Width,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Style = Application.Current.Resources["Circle"] as Style,
-                FontSize = 15
-            };
-            DockPanel.SetDock(first, Dock.Right); Title_buttons.Children.Add(first);
-            DockPanel.SetDock(second, Dock.Right); Title_buttons.Children.Add(second);
-            DockPanel.SetDock(third, Dock.Right); Title_buttons.Children.Add(third);
+                DockPanel Title_buttons = new DockPanel
+                {
+                    LastChildFill = false
+                };
+                Grid.SetColumn(Title_buttons, 1);
 
-            Label Drag = new Label();
-            Grid.SetColumn(Drag, 0);
 
-            MTitle.Children.Add(Title_buttons); MTitle.Children.Add(Drag);
-            Own.Children.Add(MTitle);
+                first = new Button()
+                {
+                    Content = "X",
+                    Width = 33,
+                    Style = Application.Current.Resources["Circle"] as Style
+                };
+                third = new Button()
+                {
+                    Content = "_",
+                    Width = first.Width,
+                    FontSize = 15,
+                    Style = Application.Current.Resources["Circle"] as Style
+                };
+                second = new Button()
+                {
+                    Content = "+",
+                    Width = first.Width,
+                    FontSize = 15,
+                    Style = Application.Current.Resources["Circle"] as Style
+                };
 
-            first.Click += new RoutedEventHandler(First_Button);
-            second.Click += new RoutedEventHandler(Second_Button);
-            third.Click += new RoutedEventHandler(Third_Button);
-            Drag.MouseDown += new MouseButtonEventHandler(DragDown);
+                DockPanel.SetDock(first, Dock.Right); Title_buttons.Children.Add(first);
+                DockPanel.SetDock(second, Dock.Right); Title_buttons.Children.Add(second);
+                DockPanel.SetDock(third, Dock.Right); Title_buttons.Children.Add(third);
+
+                Label Drag = new Label();
+                Grid.SetColumn(Drag, 0);
+
+                MTitle.Children.Add(Title_buttons); MTitle.Children.Add(Drag);
+                Own.Children.Add(MTitle);
+
+                first.Click += new RoutedEventHandler(First_Button);
+                second.Click += new RoutedEventHandler(Second_Button);
+                third.Click += new RoutedEventHandler(Third_Button);
+                Drag.MouseDown += new MouseButtonEventHandler(DragDown);
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
         }
         #endregion
 
@@ -336,6 +378,6 @@ namespace SMessenger
             this.Close();
         }
         #endregion
-        
+
     }
 }

@@ -1,35 +1,16 @@
-﻿<UserControl x:Class="SMessenger.MessegeBubble"
+﻿<UserControl x:Class="SMessenger.Controls.MessegeBubble"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SMessenger"
+             xmlns:local="clr-namespace:SMessenger.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="300">
     <Border Padding="5" Background="{StaticResource WordBlueBrush}"
             >
         <Grid>
-
-            <Border Name="Prof_name"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Margin="0 7.5 0 7.5"
-                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-                    Width="35"
-                    Background="Green"
-                    Visibility="Visible"
-                    BorderBrush="{StaticResource ForegroundLightBrush}"
-                    BorderThickness="1"
-                    >
-                <TextBlock VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Foreground="{StaticResource ForegroundLightBrush}"
-                           FontFamily="{StaticResource LatoRegular}"
-                           />
-            </Border>
-
-            <Grid Name="Grid_"  Margin="25 0 0 0" HorizontalAlignment="Left">
+            
+            <Grid Name="Grid_"  Margin="25 10 0 0" HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -70,6 +51,25 @@
 
             </Grid>
 
+            <Border Name="Prof_name"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="0 0 0 7.5"
+                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                    Width="38"
+                    Background="Green"
+                    Visibility="Visible"
+                    BorderBrush="{StaticResource ForegroundLightBrush}"
+                    BorderThickness="1"
+                    >
+                <TextBlock VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Text="VT"
+                           Foreground="{StaticResource ForegroundLightBrush}"
+                           FontFamily="{StaticResource LatoRegular}"
+                           />
+            </Border>
         </Grid>
     </Border>
 </UserControl>

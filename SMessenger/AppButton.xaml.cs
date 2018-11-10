@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SMessenger
+namespace WpfApp11
 {
     /// <summary>
-    /// Логика взаимодействия для UserControl1.xaml
+    /// Логика взаимодействия для AppButton.xaml
     /// </summary>
-    public partial class MessegeBubble : UserControl
+    public partial class AppButton : UserControl
     {
-        public MessegeBubble()
+        public AppButton()
         {
             InitializeComponent();
         }

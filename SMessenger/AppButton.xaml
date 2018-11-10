@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SMessenger.AppButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SMessenger.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Padding="5" Background="{StaticResource BackgroundGrayBrush}"
+            >
+        <Grid>
+            <Grid Name="Grid_" HorizontalAlignment="Stretch">
+
+                <Border CornerRadius="10"
+                        Padding="15"
+                        Background="{StaticResource BackgroundGrayBrush}">
+
+                    <TextBlock Name="Text_mess"
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource LatoRegular}"
+                               Foreground="{StaticResource WordDarkBlueBrush}"
+                    />
+
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>
