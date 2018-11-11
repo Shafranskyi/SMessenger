@@ -34,7 +34,7 @@ namespace SMessenger
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            My_Title();
+            // My_Title();
 
             //Work_place();
 
@@ -43,6 +43,8 @@ namespace SMessenger
             //Messeges();
 
             //JsoN();
+
+            
         }
 
         #region Json
