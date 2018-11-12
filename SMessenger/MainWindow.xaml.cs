@@ -23,24 +23,27 @@ namespace SMessenger
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow main;
         Button first, third, second, menu;
         Grid MTitle, All, MLeft, MRight;
         ListView LMesseges;
+        TextBox Tx_mess;
 
         public MainWindow()
         {
             InitializeComponent();
+            main = this;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             My_Title();
 
-            //Work_place();
+            Work_place();
 
-            //List_of_friends();
+            List_of_friends();
 
-            //Messeges();
+            Messeges();
 
             //JsoN();
         }
@@ -82,35 +85,62 @@ namespace SMessenger
             Grid.SetRow(LMesseges, 0);
             MRight.Children.Add(LMesseges);
 
-            for (int i = 0; i < 4; ++i)
+            Grid Write_messege = new Grid();
+            Grid.SetRow(Write_messege, 1);
+            ColumnDefinition Wr1 = new ColumnDefinition()
             {
-                MessegeBubble d = new MessegeBubble();
-                if (i == 1 || i == 3)
-                {
-                    d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
-                    d.Time.HorizontalAlignment = HorizontalAlignment.Left;
-                    d.Prof_name.Visibility = Visibility.Hidden;
-                    d.Text_mess.Text = "44444444444444455555555555555555555555555555555555555555555555555555555555555555555555555svhfshd";
-                }
-                else
-                    d.Text_mess.Text = "jdbfhdbfh";
-                d.Text_mess.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                Size size = d.Text_mess.DesiredSize;
-                if (size.Width > 250)
-                    d.Grid_.Width = 250;
+                Width = new GridLength(((this.Width - 5) / 2) - 60)
+            };
+            ColumnDefinition Wr2 = new ColumnDefinition();
+            Write_messege.ColumnDefinitions.Add(Wr1);
+            Write_messege.ColumnDefinitions.Add(Wr2);
+            
+            Tx_mess = new TextBox()
+            {
+                FontSize = 10
+            };
+            Grid.SetColumn(Tx_mess, 0);
 
-                StackPanel messege = new StackPanel()
-                {
-                    Height = d.Height,
-                    Width = ((this.Width - 5) / 2) - 15
-                };
+            Button Send = new Button()
+            {
+                Style = Application.Current.Resources["Kv"] as Style,
+                Width = 50,
+                Height = 30,
+                Content = "Send"
+            };
+            Send.Click += new RoutedEventHandler(Send_Click);
+            Grid.SetColumn(Send, 1);
 
-                messege.Children.Add(d);
-                LMesseges.Items.Add(messege);
-            }
+            Write_messege.Children.Add(Tx_mess);
+            Write_messege.Children.Add(Send);
+            MRight.Children.Add(Write_messege);
 
+            MessageBox.Show(Tx_mess.ActualWidth.ToString());
+        }
+        #endregion
 
+        #region Create Messege
+        private void Create_Messege(string Messege)
+        {
+            MessegeBubble d = new MessegeBubble();
+            d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
+            d.Time.HorizontalAlignment = HorizontalAlignment.Left;
+            d.Prof_name.Visibility = Visibility.Hidden;
+            d.Text_mess.Text = Messege;
 
+            d.Text_mess.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            Size size = d.Text_mess.DesiredSize;
+            if (size.Width > 250)
+                d.Grid_.Width = 250;
+
+            StackPanel messege = new StackPanel()
+            {
+                Height = d.Height,
+                Width = ((this.Width - 5) / 2) - 15
+            };
+
+            messege.Children.Add(d);
+            LMesseges.Items.Add(messege);
         }
         #endregion
 
@@ -379,5 +409,11 @@ namespace SMessenger
         }
         #endregion
 
+        #region Events
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+            Create_Messege(Tx_mess.Text);
+        }
+        #endregion
     }
 }
