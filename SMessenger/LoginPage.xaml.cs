@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SMessenger;
 
 namespace SMessenger
 {
@@ -22,6 +23,13 @@ namespace SMessenger
         public LoginPages()
         {
             InitializeComponent();
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow Main = new MainWindow();
+            this.Close();
+            Main.Show();
         }
     }
 }

@@ -49,11 +49,13 @@
                             <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30" />
 
                             <!-- Login button -->
-                            <Button Content="Login" 
+                            <Button x:Name="Login"
+                                    Content="Login" 
                                     IsDefault="True"
                                     Command="{Binding LoginCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
-                                    HorizontalAlignment="Center" />
+                                    HorizontalAlignment="Center" 
+                                    Click="Login_Click"/>
 
                         </StackPanel>
 
