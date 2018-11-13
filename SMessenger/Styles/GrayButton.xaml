@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SMessenger">
+
+    <Style TargetType="local:MButton" x:Key="Circle">
+        <Setter Property="Background" Value="#373737"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:MButton">
+                    <Border Name="Bord1" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <TextBlock Name="tx" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" Foreground="White"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#EBEBEB" />
+                            <Setter TargetName="tx" Property="Foreground" Value="Black"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                                        <GradientStop Color="#F3F3F3" Offset="0.35"/>
+                                        <GradientStop Color="#FFC9C7BA" Offset="0.95"/>
+                                        <GradientStop Color="#CDCDCD" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="tx" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

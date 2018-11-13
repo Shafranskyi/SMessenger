@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:SMessenger"
       mc:Ignorable="d" 
       x:Name="Page"
-      d:DesignHeight="600" d:DesignWidth="600"
-      >
+      d:DesignHeight="600" d:DesignWidth="600" WindowStartupLocation="CenterScreen">
 
     <Border>
         <Grid>

@@ -23,27 +23,26 @@ namespace SMessenger
     public partial class MainWindow : Window
     {
         public static MainWindow main;
-        Button first, third, second, menu;
-        Grid MTitle, All, MLeft, MRight;
-        ListView LMesseges;
         public TextBox Tx_mess;
 
         public MainWindow()
         {
             InitializeComponent();
             main = this;
-            Network.Start_Network();
+            //Network.Start_Network();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            My_Title();
+            LC.MaxWidth = Own.ActualWidth / 2;
 
-            Work_place();
+            //My_Title();
 
-            List_of_friends();
+            //Work_place();
 
-            Messeges();
+            //List_of_friends();
+
+            //Messeges();
 
             //JsoN();
         }
@@ -77,45 +76,37 @@ namespace SMessenger
         #region Chat
         private void Messeges()
         {
-            LMesseges = new ListView()
-            {
-                ItemContainerStyle = Application.Current.Resources["ListViewItemOptionStyle"] as Style,
-                Background = Application.Current.Resources["WordBlueBrush"] as Brush
-            };
-            Grid.SetRow(LMesseges, 0);
-            MRight.Children.Add(LMesseges);
-
-            Grid Write_messege = new Grid();
-            Grid.SetRow(Write_messege, 1);
-            ColumnDefinition Wr1 = new ColumnDefinition()
-            {
-                Width = new GridLength(((this.Width - 5) / 2) - 60)
-            };
-            ColumnDefinition Wr2 = new ColumnDefinition();
-            Write_messege.ColumnDefinitions.Add(Wr1);
-            Write_messege.ColumnDefinitions.Add(Wr2);
+            //Grid Write_messege = new Grid();
+            //Grid.SetRow(Write_messege, 1);
+            //ColumnDefinition Wr1 = new ColumnDefinition()
+            //{
+            //    Width = new GridLength(((this.Width - 5) / 2) - 60)
+            //};
+            //ColumnDefinition Wr2 = new ColumnDefinition();
+            //Write_messege.ColumnDefinitions.Add(Wr1);
+            //Write_messege.ColumnDefinitions.Add(Wr2);
             
-            Tx_mess = new TextBox()
-            {
-                FontSize = 10
-            };
-            Grid.SetColumn(Tx_mess, 0);
+            //Tx_mess = new TextBox()
+            //{
+            //    FontSize = 10
+            //};
+            //Grid.SetColumn(Tx_mess, 0);
 
-            Button Send = new Button()
-            {
-                Style = Application.Current.Resources["Kv"] as Style,
-                Width = 50,
-                Height = 30,
-                Content = "Send"
-            };
-            Send.Click += new RoutedEventHandler(Send_Click);
-            Grid.SetColumn(Send, 1);
+            //Button Send = new Button()
+            //{
+            //    Style = Application.Current.Resources["Kv"] as Style,
+            //    Width = 50,
+            //    Height = 30,
+            //    Content = "Send"
+            //};
+            //Send.Click += new RoutedEventHandler(Send_Click);
+            //Grid.SetColumn(Send, 1);
 
-            Write_messege.Children.Add(Tx_mess);
-            Write_messege.Children.Add(Send);
-            MRight.Children.Add(Write_messege);
+            //Write_messege.Children.Add(Tx_mess);
+            //Write_messege.Children.Add(Send);
+            //MRight.Children.Add(Write_messege);
 
-            MessageBox.Show(Tx_mess.ActualWidth.ToString());
+            //MessageBox.Show(Tx_mess.ActualWidth.ToString());
         }
         #endregion
 
@@ -140,16 +131,13 @@ namespace SMessenger
             };
 
             messege.Children.Add(d);
-            LMesseges.Items.Add(messege);
+            Chat.Items.Add(messege);
         }
         #endregion
 
-        #region List Friends
-        private void List_of_friends()
+        #region Add Friend
+        private void Friend()
         {
-            ListView friends = new ListView();
-            Grid.SetRow(friends, 1);
-
             StackPanel friend = new StackPanel()
             {
                 Height = 50,
@@ -216,166 +204,25 @@ namespace SMessenger
             F.Children.Add(Im);
             F.Children.Add(Tx);
             friend.Children.Add(F);
-            friends.Items.Add(friend);
-            MLeft.Children.Add(friends);
         }
         #endregion
 
         #region Work place
         private void Work_place()
         {
-            All = new Grid();
-            Grid.SetRow(All, 1);
-            ColumnDefinition A1 = new ColumnDefinition
-            {
-                MaxWidth = Own.ActualWidth / 2,
-                MinWidth = 50
-            };
-            ColumnDefinition A2 = new ColumnDefinition
-            {
-                Width = new GridLength(5)
-            };
-            ColumnDefinition A3 = new ColumnDefinition();
-            All.ColumnDefinitions.Add(A1);
-            All.ColumnDefinitions.Add(A2);
-            All.ColumnDefinitions.Add(A3);
-
-            MLeft = new Grid();
-            Grid.SetColumn(MLeft, 0);
-            RowDefinition Fr1 = new RowDefinition
-            {
-                Height = new GridLength(50)
-            };
-            RowDefinition Fr2 = new RowDefinition();
-            MLeft.RowDefinitions.Add(Fr1);
-            MLeft.RowDefinitions.Add(Fr2);
-
-            Grid Row_Search_and_Menu = new Grid();
-            Grid.SetRow(Row_Search_and_Menu, 0);
-            ColumnDefinition Fc1 = new ColumnDefinition
-            {
-                Width = new GridLength(50)
-            };
-            ColumnDefinition Fc2 = new ColumnDefinition();
-            Row_Search_and_Menu.ColumnDefinitions.Add(Fc1);
-            Row_Search_and_Menu.ColumnDefinitions.Add(Fc2);
-
-            menu = new Button()
-            {
-                Style = Application.Current.Resources["Kv"] as Style,
-                Margin = new Thickness(5),
-                Content = "M",
-                FontSize = 15
-            };
-            Grid.SetColumn(menu, 0);
-            TextBox search = new TextBox()
-            {
-                Style = Application.Current.Resources["TextBox"] as Style,
-                Margin = new Thickness(10),
-                Background = new SolidColorBrush(Color.FromRgb(234, 229, 229)),
-                FontSize = 15,
-                FontFamily = new FontFamily("Comic Sans MS"),
-                VerticalContentAlignment = VerticalAlignment.Center,
-                BorderThickness = new Thickness(0)
-            };
-            Grid.SetColumn(search, 1);
-
-            Row_Search_and_Menu.Children.Add(menu);
-            Row_Search_and_Menu.Children.Add(search);
-            MLeft.Children.Add(Row_Search_and_Menu);
-
-            GridSplitter Spl = new GridSplitter()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Stretch,
-                Width = 5,
-                Background = new SolidColorBrush(Colors.Black)
-            };
-            Grid.SetColumn(Spl, 1);
-
-            MRight = new Grid();
-            Grid.SetColumn(MRight, 2);
-            RowDefinition Mr1 = new RowDefinition();
-            RowDefinition Mr2 = new RowDefinition()
-            {
-                Height = new GridLength(100)
-            };
-            MRight.RowDefinitions.Add(Mr1);
-            MRight.RowDefinitions.Add(Mr2);
-            
-            All.Children.Add(MLeft);
-            All.Children.Add(Spl);
-            All.Children.Add(MRight);
-
-            Own.Children.Add(All);
+            //TextBox search = new TextBox()
+            //{
+            //    Style = Application.Current.Resources["TextBox"] as Style,
+            //    Margin = new Thickness(10),
+            //    Background = new SolidColorBrush(Color.FromRgb(234, 229, 229)),
+            //    FontSize = 15,
+            //    FontFamily = new FontFamily("Comic Sans MS"),
+            //    VerticalContentAlignment = VerticalAlignment.Center,
+            //    BorderThickness = new Thickness(0)
+            //};
         }
         #endregion
-
-        #region Create Title
-        private void My_Title()
-        {
-            try
-            {
-                row1.Height = new GridLength(33);
-                MTitle = new Grid();
-                ColumnDefinition MT1 = new ColumnDefinition();
-                ColumnDefinition MT2 = new ColumnDefinition()
-                {
-                    Width = new GridLength(33 * 3)
-                };
-                MTitle.ColumnDefinitions.Add(MT1); MTitle.ColumnDefinitions.Add(MT2);
-                Grid.SetRow(MTitle, 0);
-
-                DockPanel Title_buttons = new DockPanel
-                {
-                    LastChildFill = false
-                };
-                Grid.SetColumn(Title_buttons, 1);
-
-
-                first = new Button()
-                {
-                    Content = "X",
-                    Width = 33,
-                    Style = Application.Current.Resources["Circle"] as Style
-                };
-                third = new Button()
-                {
-                    Content = "_",
-                    Width = first.Width,
-                    FontSize = 15,
-                    Style = Application.Current.Resources["Circle"] as Style
-                };
-                second = new Button()
-                {
-                    Content = "+",
-                    Width = first.Width,
-                    FontSize = 15,
-                    Style = Application.Current.Resources["Circle"] as Style
-                };
-
-                DockPanel.SetDock(first, Dock.Right); Title_buttons.Children.Add(first);
-                DockPanel.SetDock(second, Dock.Right); Title_buttons.Children.Add(second);
-                DockPanel.SetDock(third, Dock.Right); Title_buttons.Children.Add(third);
-
-                Label Drag = new Label();
-                Grid.SetColumn(Drag, 0);
-
-                MTitle.Children.Add(Title_buttons); MTitle.Children.Add(Drag);
-                Own.Children.Add(MTitle);
-
-                first.Click += new RoutedEventHandler(First_Button);
-                second.Click += new RoutedEventHandler(Second_Button);
-                third.Click += new RoutedEventHandler(Third_Button);
-                Drag.MouseDown += new MouseButtonEventHandler(DragDown);
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show(x.Message);
-            }
-        }
-        #endregion
-
+        
         #region MoveWindow
         private void DragDown(object sender, MouseButtonEventArgs e)
         {
