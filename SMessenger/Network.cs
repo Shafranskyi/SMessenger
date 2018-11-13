@@ -4,9 +4,6 @@ using System.Windows;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Input;
-using System.ComponentModel;
-using System.Windows.Controls;
 using System.Net;
 
 
@@ -14,22 +11,28 @@ namespace SMessenger
 {
     public class Network
     {
-        private static int port = 8005;
-        private static string address = "192.168.1.79";
+        private static readonly int port = 8005;
+        private static readonly string address = "10.7.180.113";
         static public Socket socket;
 
-        private async void XXX()
+        public static void Start_Network()
+        {
+            Start();
+            XXX();
+        }
+
+        private static async void XXX()
         {
             await Task.Run(() => Gett());
         }
 
-        private void click_Click(object sender, RoutedEventArgs e)
+        public static void Send()
         {
-            //byte[] dat = Encoding.Unicode.GetBytes("(" + DateTime.Now.ToShortTimeString() + ") " + name.Text + ": " + t1.Text);
-           // socket.Send(dat);
+            byte[] dat = Encoding.Unicode.GetBytes(MainWindow.main.Tx_mess.Text);
+            socket.Send(dat);
         }
 
-        public void Gett()
+        private static void Gett()
         {
             while (true)
             {
@@ -45,12 +48,12 @@ namespace SMessenger
 
                 MainWindow.main.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (ThreadStart)delegate
                 {
-                    //this.text1.Text += builder.ToString() + Environment.NewLine;
+                    MainWindow.main.Create_Messege(builder.ToString());
                 });
             }
         }
 
-        static void Start()
+        private static void Start()
         {
             try
             {
@@ -60,30 +63,8 @@ namespace SMessenger
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
-
-        //private void Window_Closing(object sender, CancelEventArgs e)
-        //{
-        //    //socket.Shutdown(SocketShutdown.Both);
-        //    //socket.Close();
-        //}
-
-        //private void t1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Enter)
-        //    {
-        //        click_Click(sender, e);
-        //    }
-        //}
-
-        //private void name_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    if (name.Text != "" && name.Text != null)
-        //        t1.IsEnabled = click.IsEnabled = true;
-        //    else
-        //        t1.IsEnabled = click.IsEnabled = false;
-        //}
     }
 }

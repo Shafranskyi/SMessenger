@@ -15,7 +15,7 @@ namespace Network
         static void Main(string[] args)
         {
             Sockets = new List<Socket>();
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("10.7.180.105"), port);
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("10.7.180.113"), port);
             Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
@@ -72,7 +72,7 @@ namespace Network
                         builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
                     while (t.Available > 0);
-                    Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
+                    Console.WriteLine(builder.ToString());
                     Per(builder.ToString());
                 }
             }

@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SMessenger.Controls;
 using System.Runtime.Serialization.Json;
@@ -27,12 +26,13 @@ namespace SMessenger
         Button first, third, second, menu;
         Grid MTitle, All, MLeft, MRight;
         ListView LMesseges;
-        TextBox Tx_mess;
+        public TextBox Tx_mess;
 
         public MainWindow()
         {
             InitializeComponent();
             main = this;
+            Network.Start_Network();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -120,7 +120,7 @@ namespace SMessenger
         #endregion
 
         #region Create Messege
-        private void Create_Messege(string Messege)
+        public void Create_Messege(string Messege)
         {
             MessegeBubble d = new MessegeBubble();
             d.Path_.HorizontalAlignment = d.Grid_.HorizontalAlignment = HorizontalAlignment.Right;
@@ -412,7 +412,7 @@ namespace SMessenger
         #region Events
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            Create_Messege(Tx_mess.Text);
+            Network.Send();
         }
         #endregion
     }
