@@ -10,26 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SMessenger;
+using System.Threading;
 
-namespace SMessenger
+namespace SMessenger.Controls
 {
     /// <summary>
     /// Логика взаимодействия для LoginPage.xaml
     /// </summary>
-    public partial class LoginPages : Window
+    public partial class LoginPage : UserControl
     {
-        public LoginPages()
+        public LoginPage()
         {
             InitializeComponent();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow Main = new MainWindow();
-            this.Close();
-            Main.Show();
+            MainWindow.main.Login_page.Visibility = Visibility.Hidden;
+            MainWindow.main.Own.Visibility = Visibility.Visible;
         }
     }
 }
