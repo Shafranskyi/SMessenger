@@ -66,7 +66,14 @@
       <DependentUpon>MessegeBubble.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\MButton.cs" />
+    <Compile Include="Controls\Registration.xaml.cs">
+      <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Registration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

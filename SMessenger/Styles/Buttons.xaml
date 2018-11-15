@@ -84,7 +84,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}" />
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}" />
-        <Setter Property="Padding" Value="50 10" />
+        <Setter Property="Padding" Value="30 10" />
         <Setter Property="Margin" Value="0 10" />
 
         <Setter Property="Template">

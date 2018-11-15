@@ -12,7 +12,7 @@ namespace SMessenger
     public class Network
     {
         private static readonly int port = 8005;
-        private static readonly string address = "10.7.180.113";
+        private static readonly string address = "127.0.0.1";
         static public Socket socket;
 
         public static void Start_Network()

@@ -58,10 +58,12 @@
 
                     </Border>
 
-                    <Button Style="{StaticResource TextButton}" 
+                    <Button x:Name="S_up"
+                            Style="{StaticResource TextButton}" 
                             Command="{Binding RegisterCommand}"
-                            Content="Or, create a free account..." 
-                            HorizontalAlignment="Center" />
+                            Content="Sing up" 
+                            HorizontalAlignment="Center"
+                            Click="S_up_Click"/>
 
                 </StackPanel>
             </ScrollViewer>

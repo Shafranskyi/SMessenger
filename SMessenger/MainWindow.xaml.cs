@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Net.Sockets;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -31,22 +32,7 @@ namespace SMessenger
             main = this;
             //Network.Start_Network();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LC.MaxWidth = Own.ActualWidth / 2;
-
-            //My_Title();
-
-            //Work_place();
-
-            //List_of_friends();
-
-            //Messeges();
-
-            //JsoN();
-        }
-
+        
         #region Json
         private void JsoN()
         {
@@ -76,37 +62,36 @@ namespace SMessenger
         #region Chat
         private void Messeges()
         {
-            //Grid Write_messege = new Grid();
-            //Grid.SetRow(Write_messege, 1);
-            //ColumnDefinition Wr1 = new ColumnDefinition()
-            //{
-            //    Width = new GridLength(((this.Width - 5) / 2) - 60)
-            //};
-            //ColumnDefinition Wr2 = new ColumnDefinition();
-            //Write_messege.ColumnDefinitions.Add(Wr1);
-            //Write_messege.ColumnDefinitions.Add(Wr2);
+            Grid Write_messege = new Grid();
+            Grid.SetRow(Write_messege, 1);
+            ColumnDefinition Wr1 = new ColumnDefinition()
+            {
+                Width = new GridLength(((this.Width - 5) / 2) - 60)
+            };
+            ColumnDefinition Wr2 = new ColumnDefinition();
+            Write_messege.ColumnDefinitions.Add(Wr1);
+            Write_messege.ColumnDefinitions.Add(Wr2);
+
+            Tx_mess = new TextBox()
+            {
+                FontSize = 10
+            };
+            Grid.SetColumn(Tx_mess, 0);
+
+            Button Send = new Button()
+            {
+                Style = Application.Current.Resources["Kv"] as Style,
+                Width = 50,
+                Height = 30,
+                Content = "Send"
+            };
+            Send.Click += new RoutedEventHandler(Send_Click);
+            Grid.SetColumn(Send, 1);
+
+            Write_messege.Children.Add(Tx_mess);
+            Write_messege.Children.Add(Send);
+            New_Right.Children.Add(Write_messege);
             
-            //Tx_mess = new TextBox()
-            //{
-            //    FontSize = 10
-            //};
-            //Grid.SetColumn(Tx_mess, 0);
-
-            //Button Send = new Button()
-            //{
-            //    Style = Application.Current.Resources["Kv"] as Style,
-            //    Width = 50,
-            //    Height = 30,
-            //    Content = "Send"
-            //};
-            //Send.Click += new RoutedEventHandler(Send_Click);
-            //Grid.SetColumn(Send, 1);
-
-            //Write_messege.Children.Add(Tx_mess);
-            //Write_messege.Children.Add(Send);
-            //MRight.Children.Add(Write_messege);
-
-            //MessageBox.Show(Tx_mess.ActualWidth.ToString());
         }
         #endregion
 
@@ -260,6 +245,29 @@ namespace SMessenger
         private void Send_Click(object sender, RoutedEventArgs e)
         {
             Network.Send();
+        }
+        #endregion
+
+        #region Windows Event
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LC.MaxWidth = Own.ActualWidth / 2;
+
+            //My_Title();
+
+            //Work_place();
+
+            //List_of_friends();
+
+            Messeges();
+
+            //JsoN();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Network.socket.Shutdown(SocketShutdown.Both);
+            Network.socket.Close();
         }
         #endregion
     }

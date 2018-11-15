@@ -15,7 +15,7 @@ namespace Network
         static void Main(string[] args)
         {
             Sockets = new List<Socket>();
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("10.7.180.113"), port);
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
@@ -46,9 +46,17 @@ namespace Network
             {
                 for (int i = 0; i < Sockets.Count; ++i)
                 {
-                    byte[] dat = new byte[256];
-                    dat = Encoding.Unicode.GetBytes(message);
-                    Sockets[i].Send(dat);
+                    try
+                    {
+                        byte[] dat = new byte[256];
+                        dat = Encoding.Unicode.GetBytes(message);
+                        Sockets[i].Send(dat);
+                    }
+                    catch (Exception ex)
+                    {
+                        Sockets.RemoveAt(i--);
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
             catch (Exception ex)
@@ -59,9 +67,9 @@ namespace Network
 
         private static void Gett(Socket t)
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     StringBuilder builder = new StringBuilder();
                     int bytes = 0;
@@ -72,14 +80,19 @@ namespace Network
                         builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
                     while (t.Available > 0);
-                    Console.WriteLine(builder.ToString());
+                    //Console.WriteLine(builder.ToString());
                     Per(builder.ToString());
+
+                }
+                catch (Exception ex)
+                {
+                    Sockets.Remove(t);
+                    Console.WriteLine(Sockets.Count);
+                    Console.WriteLine(ex.Message);
+                    break;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
         }
     }
 }

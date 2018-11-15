@@ -12,29 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Threading;
 
 namespace SMessenger.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class Registration : UserControl
     {
-        public LoginPage()
+        public Registration()
         {
             InitializeComponent();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void Sing_up_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Login_page.Visibility = Visibility.Hidden;
+            MainWindow.main.Sing_up.Visibility = Visibility.Hidden;
             MainWindow.main.Own.Visibility = Visibility.Visible;
-        }
-        private void S_up_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Login_page.Visibility = Visibility.Hidden;
-            MainWindow.main.Sing_up.Visibility = Visibility.Visible;
         }
     }
 }
