@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SMessenger.Controls
+namespace SMessenger.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Registration.xaml
@@ -27,8 +27,18 @@ namespace SMessenger.Controls
 
         private void Sing_up_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Sing_up.Visibility = Visibility.Hidden;
-            MainWindow.main.Own.Visibility = Visibility.Visible;
+            MainWindow.main.Registration.Visibility = Visibility.Hidden;
+            MainWindow.main.Chat.Visibility = Visibility.Visible;
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            Bord3.Background = Application.Current.Resources["WordVeryLightBlueBrush"] as Brush;
+        }
+
+        private void Expand_Collapsed(object sender, RoutedEventArgs e)
+        {
+            Bord3.Background = null;
         }
     }
 }

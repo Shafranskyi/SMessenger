@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Net.Sockets;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SMessenger.Controls;
 using System.Runtime.Serialization.Json;
 using System.IO;
+
+using SMessenger.Controls;
 
 namespace SMessenger
 {
@@ -90,7 +91,7 @@ namespace SMessenger
 
             Write_messege.Children.Add(Tx_mess);
             Write_messege.Children.Add(Send);
-            New_Right.Children.Add(Write_messege);
+            Chat.New_Right.Children.Add(Write_messege);
             
         }
         #endregion
@@ -116,7 +117,7 @@ namespace SMessenger
             };
 
             messege.Children.Add(d);
-            Chat.Items.Add(messege);
+            Chat.Chat_L.Items.Add(messege);
         }
         #endregion
 
@@ -126,12 +127,13 @@ namespace SMessenger
             StackPanel friend = new StackPanel()
             {
                 Height = 50,
-                Orientation = Orientation.Horizontal
+                Orientation = Orientation.Horizontal,
+                Background = Application.Current.Resources["WordVeryVeryLightBlueBrush"] as Brush
             };
 
             Grid F = new Grid()
             {
-                Width = ((this.Width - 5) / 2) - 25
+                Width = ((this.Width - 5) / 2) - 28
             };
 
             ColumnDefinition Ig = new ColumnDefinition()
@@ -167,7 +169,8 @@ namespace SMessenger
 
             TextBlock tx_title = new TextBlock()
             {
-                Text = "1111111111",
+                Margin = new Thickness(10, 0, 0, 0),
+                Text = "Jack",
                 FontSize = 15,
                 FontFamily = new FontFamily("Comic Sans MS"),
                 VerticalAlignment = VerticalAlignment.Center
@@ -176,7 +179,8 @@ namespace SMessenger
 
             TextBlock tx = new TextBlock()
             {
-                Text = "ssdfsdf555555555555555555555555555555555555555555555555555555555555555555555555555555555555",
+                Margin = new Thickness(10,0,0,0),
+                Text = "Hello world!",
                 FontSize = 15,
                 FontFamily = new FontFamily("Comic Sans MS"),
                 VerticalAlignment = VerticalAlignment.Center,
@@ -189,22 +193,7 @@ namespace SMessenger
             F.Children.Add(Im);
             F.Children.Add(Tx);
             friend.Children.Add(F);
-        }
-        #endregion
-
-        #region Work place
-        private void Work_place()
-        {
-            //TextBox search = new TextBox()
-            //{
-            //    Style = Application.Current.Resources["TextBox"] as Style,
-            //    Margin = new Thickness(10),
-            //    Background = new SolidColorBrush(Color.FromRgb(234, 229, 229)),
-            //    FontSize = 15,
-            //    FontFamily = new FontFamily("Comic Sans MS"),
-            //    VerticalContentAlignment = VerticalAlignment.Center,
-            //    BorderThickness = new Thickness(0)
-            //};
+            Chat.Friends.Items.Add(friend);
         }
         #endregion
         
@@ -251,13 +240,14 @@ namespace SMessenger
         #region Windows Event
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LC.MaxWidth = Own.ActualWidth / 2;
+            Chat.LC.MaxWidth = Chat.Own.ActualWidth / 2;
 
             //My_Title();
 
             //Work_place();
 
-            //List_of_friends();
+            for (int i = 0; i < 15; ++i)
+                Friend();
 
             Messeges();
 
@@ -266,8 +256,8 @@ namespace SMessenger
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Network.socket.Shutdown(SocketShutdown.Both);
-            Network.socket.Close();
+            //Network.socket.Shutdown(SocketShutdown.Both);
+            //Network.socket.Close();
         }
         #endregion
     }

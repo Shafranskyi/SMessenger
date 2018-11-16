@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 
-namespace SMessenger.Controls
+namespace SMessenger.Pages
 {
     /// <summary>
     /// Логика взаимодействия для LoginPage.xaml
@@ -29,12 +29,13 @@ namespace SMessenger.Controls
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Login_page.Visibility = Visibility.Hidden;
-            MainWindow.main.Own.Visibility = Visibility.Visible;
+            MainWindow.main.Chat.Visibility = Visibility.Visible;
         }
+
         private void S_up_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Login_page.Visibility = Visibility.Hidden;
-            MainWindow.main.Sing_up.Visibility = Visibility.Visible;
+            MainWindow.main.Registration.Visibility = Visibility.Visible;
         }
     }
 }

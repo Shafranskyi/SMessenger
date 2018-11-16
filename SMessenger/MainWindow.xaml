@@ -4,16 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SMessenger"
-        xmlns:localC="clr-namespace:SMessenger.Controls"
+        xmlns:localC="clr-namespace:SMessenger.Pages"
         mc:Ignorable="d"
         Title="MainWindow" d:DesignHeight="600" d:DesignWidth="600"
         WindowStyle="None" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
-    <Grid>
+
+    <Grid Background="{StaticResource WordLightBlueBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Name="row1" Height="33"/>
             <RowDefinition Name="row2"/>
         </Grid.RowDefinitions>
-        <Grid Name="New_Title" Grid.Row="0">
+        <Grid Name="New_Title" Grid.Row="0" Background="{StaticResource WordLightBlueBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="99"/>
@@ -23,52 +24,11 @@
                 <local:MButton x:Name="second" Width="33" Style="{StaticResource Circle}" CornerRadius="20" FontSize="15" Content="+" Click="Second_Button"/>
                 <local:MButton x:Name="first" Width="33" Style="{StaticResource Circle}" CornerRadius="20" FontSize="15" Content="X" Click="First_Button"/>
             </DockPanel>
-            <Label MouseDown="DragDown"/>
+            <Label x:Name="Drag" MouseDown="DragDown"/>
         </Grid>
-        <Grid Name="Own" Grid.Row="1" Visibility="Hidden">
-            <Grid Name="ALL">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Name="LC" MinWidth="50"/>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid Name="New_Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid Name="M_and_S" Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <local:MButton Style="{StaticResource Circle}" CornerRadius="10" Margin="5" Content="M" FontSize="18"></local:MButton>
-                        <TextBlock Grid.Column="1"/>
-                    </Grid>
-                    <TabControl Grid.Row="1">
-                        <TabItem>
-                            <ListView Name="Friends"/>
-                        </TabItem>
-                        <TabItem>
-                            <ListView Name="Persons"/>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-                <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-                <Grid Name="New_Right" Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="100"/>
-                    </Grid.RowDefinitions>
-                    <ListView Name="Chat" ItemContainerStyle="{StaticResource ListViewItemOptionStyle}" Background="{StaticResource WordBlueBrush}"/>
-                    <Grid Name="Messege" Grid.Row="1">
-
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
-        <localC:Registration x:Name="Sing_up" Grid.Row="1" Visibility="Hidden"/>
+        <localC:Chat x:Name="Chat" Grid.Row="1" Visibility="Hidden"/>
         <localC:LoginPage x:Name="Login_page" Grid.Row="1" Visibility="Visible"/>
+        <localC:Registration x:Name="Registration" Grid.Row="1" Visibility="Hidden"/>
     </Grid>
 
 </Window>
